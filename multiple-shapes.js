@@ -65,21 +65,3 @@ svg
 .call(renderMask, 'mask-1', false)
 .call(renderMask, 'mask-2', true);
 
-// THIS WAS REPLACED BY THE FUNCTION renderMask
-
-// // mask2 and rectangle with d3
-// const mask2 = svg.append('mask').attr('id', 'mask-2');
-
-// mask2
-// .append('rect')
-// .attr('width', width)
-// .attr('height', height)
-// .attr('fill', 'white');
-
-// // Circle2 with d3
-// mask2
-// .append('g')
-// .attr('transform', `translate(${width/2},${height/2})`)
-// .append('path')
-// .attr('d', d3.symbol(d3.symbols[0], 130000)())
-// .attr("fill", "black");
