@@ -16,7 +16,7 @@ svg
     .attr('x', (d) => d * 20)
     .attr('width', 10)
     .attr('height', height)
-    .attr('mask', "url(#circle-mask-2)");
+    .attr('mask', "url(#mask-2)");
 
 // For loop and rectangles second way (Solved with groups)
 svg
@@ -29,38 +29,47 @@ svg
     .attr('y', (d) => d * 20)
     .attr('width', width)
     .attr('height', 10)
-    .attr('mask', "url(#circle-mask)");
+    .attr('mask', "url(#mask-1)");
 
-// mask and rectangle with d3
-const mask = svg.append('mask').attr('id', 'circle-mask');
 
-mask
-.append('rect')
-.attr('width', width)
-.attr('height', height)
-.attr('fill', 'black');
+const renderMask = (selection, id, inverted) => 
+{
 
-// Circle with d3
-mask
-.append('g')
-.attr('transform', `translate(${width/2},${height/2})`)
-.append('path')
-.attr('d', d3.symbol(d3.symbols[0], 130000)())
-.attr("fill", "white");
+    // mask and rectangle with d3
+    const mask = selection.append('mask').attr('id', id);
 
-// mask2 and rectangle with d3
-const mask2 = svg.append('mask').attr('id', 'circle-mask-2');
+    mask
+    .append('rect')
+    .attr('width', width)
+    .attr('height', height)
+    .attr('fill', inverted ? 'black' : 'white');
 
-mask2
-.append('rect')
-.attr('width', width)
-.attr('height', height)
-.attr('fill', 'white');
+    // Circle with d3
+    mask
+    .append('g')
+    .attr('transform', `translate(${width/2},${height/2})`)
+    .append('path')
+    .attr('d', d3.symbol(d3.symbols[1], 130000)())
+    .attr("fill", inverted ? "white" : "black");
+};
+renderMask(svg, 'mask-1', false);
+renderMask(svg, 'mask-2', true);
 
-// Circle2 with d3
-mask2
-.append('g')
-.attr('transform', `translate(${width/2},${height/2})`)
-.append('path')
-.attr('d', d3.symbol(d3.symbols[0], 130000)())
-.attr("fill", "black");
+// THIS WAS REPLACED BY THE FUNCTION renderMask
+
+// // mask2 and rectangle with d3
+// const mask2 = svg.append('mask').attr('id', 'mask-2');
+
+// mask2
+// .append('rect')
+// .attr('width', width)
+// .attr('height', height)
+// .attr('fill', 'white');
+
+// // Circle2 with d3
+// mask2
+// .append('g')
+// .attr('transform', `translate(${width/2},${height/2})`)
+// .append('path')
+// .attr('d', d3.symbol(d3.symbols[0], 130000)())
+// .attr("fill", "black");
