@@ -52,8 +52,13 @@ const renderMask = (selection, id, inverted) =>
     .attr('d', d3.symbol(d3.symbols[1], 130000)())
     .attr("fill", inverted ? "white" : "black");
 };
-renderMask(svg, 'mask-1', false);
-renderMask(svg, 'mask-2', true);
+// First way to invoke the function.
+// renderMask(svg, 'mask-1', false);
+// renderMask(svg, 'mask-2', true);
+
+// Second way to invoke a function.
+svg.call(renderMask, 'mask-1', false);
+svg.call(renderMask, 'mask-2', true);
 
 // THIS WAS REPLACED BY THE FUNCTION renderMask
 
