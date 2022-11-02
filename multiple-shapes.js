@@ -44,23 +44,21 @@ const renderMask = (selection, id, inverted) =>
     .attr('height', height)
     .attr('fill', inverted ? 'black' : 'white');
 
-    // Circle with d3
-    mask
-    .append('g')
-    .attr('transform', `translate(${width/2},${height/2})`)
-    .append('path')
-    .attr('d', d3.symbol(d3.symbols[1], 130000)())
-    .attr("fill", inverted ? "white" : "black");
+
+   mask.selectAll('g')
+    .data(d3.range(d3.symbols.length))
+    .join((enter) =>
+        enter
+        .append('g')
+        .attr('transform', (d) => `translate(${d * 125 +100},${height/2})`)
+        .append('path')
+        .attr('d', (d) => d3.symbol(d3.symbols[d], 9000)())
+        .attr('fill', inverted ? 'white' : 'black'))
+
+
+    
 };
-// First way to invoke the function.
-// renderMask(svg, 'mask-1', false);
-// renderMask(svg, 'mask-2', true);
 
-// // Second way to invoke a function.
-// svg.call(renderMask, 'mask-1', false);
-// svg.call(renderMask, 'mask-2', true);
-
-// Third way to invoke a function.
 svg
 .call(renderMask, 'mask-1', false)
 .call(renderMask, 'mask-2', true);
